@@ -81,11 +81,12 @@ module Contacts
         'ps' => 'Contacts.Invite',
         'ru' => target,
         'pl' => privacy_policy_url,
-        'app' => app_verifier,
+        'appid' => app_verifier,
       }
       query['appctx'] = context if context
       "#{url}?#{params_to_query(query)}"
     end
+  end
 
     def forced_redirect_url(params)
       target_origin = params['appctx'] and
@@ -133,6 +134,7 @@ module Contacts
         'ts' => Time.now.to_i,
       })
       token << "&sig=#{CGI.escape(Base64.encode64(sign(token)))}"
+      token.sub!(/^appid/, '')
     end
 
     def sign(token)
