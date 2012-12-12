@@ -86,6 +86,7 @@ module Contacts
       query['appctx'] = context if context
       "#{url}?#{params_to_query(query)}"
     end
+  end
 
     def forced_redirect_url(params)
       target_origin = params['appctx'] and
